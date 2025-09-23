@@ -5,7 +5,8 @@
   "type": "module",
   "main": "dist/main.js",
   "prisma": {
-    "schema": "prisma/schema.prisma"
+    "schema": "prisma/schema.prisma",
+    "seed": "ts-node -O '{\"module\":\"CommonJS\"}' apps/api/prisma/seed.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.11.0",

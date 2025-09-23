@@ -1,0 +1,98 @@
+# AtelierHub GraphQL Schema (initial)
+
+scalar DateTime
+
+enum UserRole {
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type User {
+  id: ID!
+  email: String!
+  name: String
+  role: UserRole!
+  locale: String!
+  createdAt: DateTime!
+}
+
+type Venue {
+  id: ID!
+  name: String!
+  address: String!
+  capacity: Int!
+}
+
+type Event {
+  id: ID!
+  slug: String!
+  title_en: String!
+  title_fr: String!
+  description_en: String!
+  description_fr: String!
+  coverUrl: String
+  category: String!
+  status: EventStatus!
+  sessions: [Session!]!
+  createdAt: DateTime!
+}
+
+type Session {
+  id: ID!
+  eventId: ID!
+  venueId: ID!
+  startsAt: DateTime!
+  endsAt: DateTime!
+  capacity: Int!
+  priceCents: Int!
+  venue: Venue!
+}
+
+type Query {
+  me: User
+  events(filter: EventsFilter): [Event!]!
+  event(slug: String!): Event
+  sessions(eventId: ID!): [Session!]!
+}
+
+input EventsFilter {
+  status: EventStatus
+  category: String
+}
+
+input EventInput {
+  slug: String!
+  title_en: String!
+  title_fr: String!
+  description_en: String!
+  description_fr: String!
+  coverUrl: String
+  category: String!
+  status: EventStatus!
+}
+
+input ScheduleSessionInput {
+  eventId: ID!
+  venueId: ID!
+  startsAt: DateTime!
+  endsAt: DateTime!
+  capacity: Int!
+  priceCents: Int!
+}
+
+type Mutation {
+  createEvent(input: EventInput!): Event!
+  updateEvent(id: ID!, input: EventInput!): Event!
+  scheduleSession(input: ScheduleSessionInput!): Session!
+
+  # Stubs for later implementation
+  purchase: Boolean!
+  redeemCoupon(code: String!): Boolean!
+  checkInTicket(ticketId: ID!): Boolean!
+}

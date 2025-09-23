@@ -3,13 +3,22 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildContext } from './utils/context';
 import { resolvers } from './resolvers';
 import { logger } from './utils/logger';
 
-const typeDefs = readFileSync(join(process.cwd(), 'apps/api/src/schema/index.graphql'), 'utf8');
+function loadTypeDefs(): string {
+  const distPath = join(process.cwd(), 'dist/apps/api/schema/index.graphql');
+  const srcPath = join(process.cwd(), 'apps/api/src/schema/index.graphql');
+  if (existsSync(distPath)) {
+    return readFileSync(distPath, 'utf8');
+  }
+  return readFileSync(srcPath, 'utf8');
+}
+
+const typeDefs = loadTypeDefs();
 
 export async function startServer({ port = 4000 }: { port?: number } = {}) {
   const app = express();
