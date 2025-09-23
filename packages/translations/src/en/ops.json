@@ -1,0 +1,14 @@
+{
+  "title": "Ops Console",
+  "login": {
+    "title": "Staff Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in"
+  },
+  "events": {
+    "create": "Create event",
+    "edit": "Edit event",
+    "list": "Events list"
+  }
+}

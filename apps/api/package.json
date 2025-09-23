@@ -1,0 +1,30 @@
+{
+  "name": "@atelierhub/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/main.js",
+  "prisma": {
+    "schema": "prisma/schema.prisma"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dataloader": "^2.2.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "graphql": "^16.9.0",
+    "jsonwebtoken": "^9.0.2",
+    "pino": "^9.4.0",
+    "zod": "^3.23.8",
+    "@prisma/client": "latest"
+  },
+  "devDependencies": {
+    "prisma": "latest",
+    "ts-node": "^10.9.2"
+  },
+  "scripts": {
+    "seed": "ts-node -O '{\"module\":\"CommonJS\"}' apps/api/prisma/seed.ts"
+  }
+}

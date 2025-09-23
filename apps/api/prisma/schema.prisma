@@ -1,0 +1,108 @@
+// Prisma schema for AtelierHub
+// PostgreSQL 16
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  STAFF
+  CUSTOMER
+}
+
+enum EventStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  REFUNDED
+}
+
+enum TicketStatus {
+  ISSUED
+  CHECKED_IN
+  REFUNDED
+}
+
+model User {
+  id       String   @id @default(cuid())
+  email    String   @unique
+  name     String?
+  role     UserRole @default(CUSTOMER)
+  locale   String   @default("en")
+  orders   Order[]
+  createdAt DateTime @default(now())
+}
+
+model Venue {
+  id       String  @id @default(cuid())
+  name     String
+  address  String
+  capacity Int
+  sessions Session[]
+}
+
+model Event {
+  id            String      @id @default(cuid())
+  slug          String      @unique
+  title_en      String
+  title_fr      String
+  description_en String
+  description_fr String
+  coverUrl      String?
+  category      String
+  status        EventStatus @default(DRAFT)
+  sessions      Session[]
+  createdAt     DateTime @default(now())
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  event     Event    @relation(fields: [eventId], references: [id])
+  eventId   String
+  venue     Venue    @relation(fields: [venueId], references: [id])
+  venueId   String
+  startsAt  DateTime
+  endsAt    DateTime
+  capacity  Int
+  priceCents Int
+  tickets   Ticket[]
+}
+
+model Order {
+  id         String      @id @default(cuid())
+  user       User        @relation(fields: [userId], references: [id])
+  userId     String
+  totalCents Int
+  status     OrderStatus @default(PENDING)
+  createdAt  DateTime    @default(now())
+  tickets    Ticket[]
+}
+
+model Ticket {
+  id        String       @id @default(cuid())
+  order     Order        @relation(fields: [orderId], references: [id])
+  orderId   String
+  session   Session      @relation(fields: [sessionId], references: [id])
+  sessionId String
+  qr        String
+  status    TicketStatus @default(ISSUED)
+}
+
+model Coupon {
+  id              String  @id @default(cuid())
+  code            String  @unique
+  discountPercent Int
+  startsAt        DateTime
+  endsAt          DateTime
+  remaining       Int
+}

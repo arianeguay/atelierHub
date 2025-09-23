@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/nx-project",
+  "extends": [],
+  "npmScope": "atelierhub",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "taskRunnerOptions": {
+    "default": {
+      "options": {
+        "cache": true
+      }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    },
+    "test": {
+      "cache": true
+    }
+  }
+}

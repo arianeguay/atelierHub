@@ -1,0 +1,7 @@
+{
+  "name": "translations",
+  "sourceRoot": "packages/translations/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {}
+}

@@ -1,0 +1,7 @@
+{
+  "name": "types",
+  "sourceRoot": "packages/types/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {}
+}

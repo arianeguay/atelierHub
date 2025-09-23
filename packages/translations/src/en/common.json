@@ -1,0 +1,18 @@
+{
+  "app": {
+    "name": "AtelierHub"
+  },
+  "nav": {
+    "home": "Home",
+    "account": "Account",
+    "events": "Events",
+    "logout": "Log out",
+    "login": "Log in"
+  },
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "create": "Create",
+    "edit": "Edit"
+  }
+}

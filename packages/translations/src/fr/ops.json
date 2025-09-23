@@ -1,0 +1,14 @@
+{
+  "title": "Console Ops",
+  "login": {
+    "title": "Connexion du personnel",
+    "email": "Courriel",
+    "password": "Mot de passe",
+    "submit": "Se connecter"
+  },
+  "events": {
+    "create": "Créer un événement",
+    "edit": "Modifier l'événement",
+    "list": "Liste des événements"
+  }
+}

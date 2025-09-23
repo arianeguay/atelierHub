@@ -1,0 +1,57 @@
+{
+  "name": "api",
+  "projectType": "application",
+  "root": "apps/api",
+  "sourceRoot": "apps/api/src",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "api:build",
+        "watch": true
+      }
+    },
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/api",
+        "main": "apps/api/src/main.ts",
+        "tsConfig": "apps/api/tsconfig.app.json",
+        "assets": [
+          "apps/api/prisma/**",
+          {
+            "glob": "**/*.graphql",
+            "input": "apps/api/src/schema",
+            "output": "schema"
+          }
+        ]
+      }
+    },
+    "prisma-migrate": {
+      "executor": "@nx/workspace:run-commands",
+      "options": {
+        "command": "pnpm --filter @atelierhub/api exec prisma migrate dev"
+      }
+    },
+    "prisma-seed": {
+      "executor": "@nx/workspace:run-commands",
+      "options": {
+        "command": "pnpm --filter @atelierhub/api exec prisma db seed"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/api/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["type:api", "scope:server"]
+}
