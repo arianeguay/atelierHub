@@ -1,0 +1,42 @@
+{
+  "name": "ops",
+  "projectType": "application",
+  "root": "apps/ops",
+  "sourceRoot": "apps/ops/src",
+  "targets": {
+    "serve": {
+      "executor": "@nx/angular:dev-server",
+      "options": {
+        "buildTarget": "ops:build",
+        "port": 4200
+      }
+    },
+    "build": {
+      "executor": "@nx/angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ops",
+        "index": "apps/ops/src/index.html",
+        "main": "apps/ops/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/ops/tsconfig.app.json",
+        "assets": ["apps/ops/src/favicon.ico", "apps/ops/src/assets"],
+        "styles": ["apps/ops/src/styles.css"],
+        "scripts": []
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/ops/src/**/*.ts", "apps/ops/src/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/ops/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["type:ops", "scope:client"]
+}

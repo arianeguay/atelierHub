@@ -8,14 +8,36 @@
   "plugins": [
     "@trivago/prettier-plugin-sort-imports"
   ],
+  "importOrderParserPlugins": [
+    "jsx",
+    "typescript",
+    "decorators-legacy",
+    "classProperties",
+    "importAssertions",
+    "topLevelAwait"
+  ],
   "importOrder": [
     "^react$",
     "^next(.*)$",
     "^@?\u0000",
     "^@atelierhub/(.*)$",
     "^[a-zA-Z].*$",
-    "^\./(.*)$"
+    "^\\./(.*)$"
   ],
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "overrides": [
+    {
+      "files": ["**/*.ts"],
+      "options": {
+        "parser": "typescript"
+      }
+    },
+    {
+      "files": ["**/*.tsx", "**/*.jsx"],
+      "options": {
+        "parser": "babel-ts"
+      }
+    }
+  ]
 }

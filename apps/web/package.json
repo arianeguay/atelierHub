@@ -9,11 +9,12 @@
     "start": "next start -p 3000"
   },
   "dependencies": {
+    "@apollo/client": "^3.11.8",
+    "cross-fetch": "^4.0.0",
     "next": "^15.0.0-canary.120",
+    "next-intl": "^3.16.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "@apollo/client": "^3.11.8",
-    "next-intl": "^3.16.2",
-    "cross-fetch": "^4.0.0"
+    "styled-components": "^6.1.19"
   }
 }
